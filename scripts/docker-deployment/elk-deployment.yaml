@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: elk
+  name: elk
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        run: elk
+    spec:
+      containers:
+        - name: elk
+          image: stekarabdevregistry.azurecr.io/elk:v1
+          ports:
+            - containerPort: 5000
+          resources: {}
+      restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: elk
+  name: elk-service
+spec:
+  ports:
+    - name: "5000"
+      port: 5000
+      targetPort: 5000
+  selector:
+    run: health-checker
+status:
+  loadBalancer: {}

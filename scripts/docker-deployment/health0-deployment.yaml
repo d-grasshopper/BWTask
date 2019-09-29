@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: health0
+  name: health0
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        run: health0
+    spec:
+      containers:
+        - name: health0
+          image: stekarabdevregistry.azurecr.io/health0:v1
+          ports:
+            - containerPort: 5000
+          resources: {}
+      restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: health0
+  name: health0-service
+spec:
+  ports:
+    - name: "5000"
+      port: 5000
+      targetPort: 5000
+  selector:
+    run: health0
+status:
+  loadBalancer: {}

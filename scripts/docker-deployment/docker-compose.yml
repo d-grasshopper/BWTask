@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  health0:
+    build: ../Health0
+    ports:
+      - "5000:5000"
+    networks:
+      - bwtask-backend
+
+  health1:
+    build: ../Health1
+    ports:
+      - "5001:5000"
+    networks:
+      - bwtask-backend
+
+  health2:
+    build: ../Health2
+    ports:
+      - "5002:5000"
+    networks:
+      - bwtask-backend
+
+  health3:
+    build: ../Health3
+    ports:
+      - "5003:5000"
+    networks:
+      - bwtask-backend
+
+networks:
+  bwtask-backend:
