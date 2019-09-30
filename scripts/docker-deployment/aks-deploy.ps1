@@ -9,7 +9,6 @@ az acr login --name ${subscription}${env}registry
 az aks get-credentials -g ${subscription}_${env} -n ${subscription}_${env}_aks
 
 helm init --history-max 200
-helm install --name elk stable/elastic-stack
 
 $projects = "HealthPinger", "Health0", "Health1", "Health2", "Health3"
 $services = "health-pinger", "healthzero", "healthone", "healthtwo", "healththree"
@@ -22,3 +21,5 @@ for ($i = 0; $i -lt $services.Count; $i++) {
     docker push "${subscription}${env}registry.azurecr.io/$($services[$i]):v1"
     kubectl apply -f ./$($projects[$i]).yaml
 }
+
+helm install --name elk stable/elastic-stack
