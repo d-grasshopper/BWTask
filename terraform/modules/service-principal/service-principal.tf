@@ -18,7 +18,7 @@ resource "random_string" "service_principal_random_password" {
 resource "azurerm_azuread_service_principal_password" "service_principal_password" {
     service_principal_id = "${azurerm_azuread_service_principal.service_principal.id}"
     value                = "${random_string.service_principal_random_password.result}"
-    # 720h = 1 month, should be enough for this exercise.
+
     end_date             = "${timeadd(timestamp(), "720h")}"
     lifecycle {
         ignore_changes = ["end_date"]

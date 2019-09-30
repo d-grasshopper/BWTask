@@ -34,20 +34,18 @@ module "acr" {
   ext_service_principal_id = "${module.aks.aks_service_principal_id}"
 }
 
-# Public ips.
-# IP for Singe-node version of Simple Server.
-module "single-node-pip" {
-  source          = "../public-ip"
-  subscription    = "${var.subscription}"
-  environment     = "${var.environment}"
-  location        = "${var.location}"
-  rg_name         = "${module.aks.aks_resource_group_name}"
-}
+# module "single-node-pip" {
+#   source          = "../public-ip"
+#   subscription    = "${var.subscription}"
+#   environment     = "${var.environment}"
+#   location        = "${var.location}"
+#   rg_name         = "${module.aks.aks_resource_group_name}"
+# }
 
-module "app-storage-account" {
-  source          = "../storage-account"
-  environment     = "${var.environment}"
-  subscription    = "${var.subscription}"
-  location        = "${var.location}"
-  rg_name         = "${module.main-resource-group.resource_group_name}"
-}
+# module "app-storage-account" {
+#   source          = "../storage-account"
+#   environment     = "${var.environment}"
+#   subscription    = "${var.subscription}"
+#   location        = "${var.location}"
+#   rg_name         = "${module.main-resource-group.resource_group_name}"
+# }

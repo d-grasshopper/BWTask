@@ -13,6 +13,7 @@ output "aks_name" {
 
 # NOTE: AKS creates a separate resource group
 # and you have to put the public ip for K8 Loadbalancer to this rg!
+# NOTE: We are currently not using this
 output "aks_resource_group_name" {
   value = "${azurerm_kubernetes_cluster.aks.node_resource_group}"
 }
