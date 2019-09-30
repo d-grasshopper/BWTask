@@ -2,19 +2,19 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    run: elk
-  name: elk
+    application: healththree
+  name: healththree
 spec:
   replicas: 1
   strategy: {}
   template:
     metadata:
       labels:
-        run: elk
+        application: healththree
     spec:
       containers:
-        - name: elk
-          image: stekarabdevregistry.azurecr.io/elk:v1
+        - name: healththree
+          image: stekarabdevregistry.azurecr.io/healththree:v1
           ports:
             - containerPort: 5000
           resources: {}
@@ -25,14 +25,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    run: elk
-  name: elk-service
+    application: healththree
+  name: healththree-service
 spec:
   ports:
-    - name: "5000"
-      port: 5000
-      targetPort: 5000
+    - port: 5000
   selector:
-    run: health-checker
+    application: healththree
 status:
   loadBalancer: {}

@@ -18,6 +18,6 @@ RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2.5-alpine3.9 AS runtime
 WORKDIR /app
-COPY --from=build /app/Health0/out ./
+COPY --from=build /app/out ./
 
-ENTRYPOINT ["dotnet", "Health0.dll", "--urls", "http://0.0.0.0:5002"]
+ENTRYPOINT ["dotnet", "Health2.dll", "--urls", "http://0.0.0.0:5000"]

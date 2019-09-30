@@ -2,19 +2,19 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    run: health3
-  name: health3
+    application: healthzero
+  name: healthzero
 spec:
   replicas: 1
   strategy: {}
   template:
     metadata:
       labels:
-        run: health3
+        application: healthzero
     spec:
       containers:
-        - name: health3
-          image: stekarabdevregistry.azurecr.io/health3:v1
+        - name: healthone
+          image: stekarabdevregistry.azurecr.io/healthzero:v1
           ports:
             - containerPort: 5000
           resources: {}
@@ -25,14 +25,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    run: health3
-  name: health3-service
+    application: healthzero
+  name: healthzero-service
 spec:
   ports:
-    - name: "5000"
-      port: 5000
-      targetPort: 5000
+    - port: 5000
   selector:
-    run: health3
+    application: healthzero
 status:
   loadBalancer: {}

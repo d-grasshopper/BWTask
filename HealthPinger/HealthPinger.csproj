@@ -6,14 +6,14 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\health1\Health1.xml</DocumentationFile>
-    <OutputPath>bin\Debug\Health1\</OutputPath>
+    <DocumentationFile>bin\Debug\HealthPinger\HealthPinger.xml</DocumentationFile>
+    <OutputPath>bin\Debug\HealthPinger\</OutputPath>
     <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\Health1\Health1.xml</DocumentationFile>
-    <OutputPath>bin\Release\Health1\</OutputPath>
+    <DocumentationFile>bin\Release\HealthPinger\HealthPinger.xml</DocumentationFile>
+    <OutputPath>bin\Release\HealthPinger\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

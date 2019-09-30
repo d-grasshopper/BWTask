@@ -20,4 +20,4 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:2.2.5-alpine3.9 AS runtime
 WORKDIR /app
 COPY --from=build /app/out ./
 
-ENTRYPOINT ["dotnet", "Health3.dll", "--urls", "http://0.0.0.0:5000"]
+ENTRYPOINT ["dotnet", "HealthPinger.dll", "--urls", "http://0.0.0.0:5000"]

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace Health2
 {
@@ -14,11 +9,26 @@ namespace Health2
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            var webHost = CreateWebHostBuilder(args);
+
+            webHost.Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+        public static IWebHost CreateWebHostBuilder(string[] args)
+        {
+            var config = new ConfigurationBuilder()
+                .AddCommandLine(args)
+                .Build();
+
+
+            var webHost = WebHost.CreateDefaultBuilder(args)
+                .UseKestrel()
+                .UseConfiguration(config)
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseStartup<Startup>()
+                .Build();
+
+            return webHost;
+        }
     }
 }

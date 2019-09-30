@@ -1,31 +1,49 @@
 version: "3"
 
 services:
-  health0:
-    build: ../Health0
+  health-pinger:
+    build: ../../HealthPinger/
+    ports:
+      - "5010:5000"
+    networks:
+      - bwtask-backend
+
+  healthzero:
+    build: ../../Health0/
     ports:
       - "5000:5000"
     networks:
       - bwtask-backend
 
-  health1:
-    build: ../Health1
+  healthone:
+    build: ../../Health1/
     ports:
       - "5001:5000"
     networks:
       - bwtask-backend
 
-  health2:
-    build: ../Health2
+  healthtwo:
+    build: ../../Health2/
     ports:
       - "5002:5000"
     networks:
       - bwtask-backend
 
-  health3:
-    build: ../Health3
+  healththree:
+    build: ../../Health3
     ports:
       - "5003:5000"
+    networks:
+      - bwtask-backend
+
+  elk:
+    image: sebp/elk
+    ports:
+      - "9200:9200"
+      - "5601:5601"
+      - "5044:5044"
+    environment:
+      MAX_MAP_COUNT: 280000
     networks:
       - bwtask-backend
 
