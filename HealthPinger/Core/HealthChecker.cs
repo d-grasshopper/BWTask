@@ -23,13 +23,8 @@ namespace HealthPinger.Core
         public async Task CheckServicesAndPersist()
         {
             var result = await _healthPingService.CheckHealthOfServices();
-            foreach (var service in result)
-            {
-                Console.WriteLine("Service: " + result.ToString());
-            }
 
             var elasticResult = await _elasticService.PostToElastic(result);
-            Console.WriteLine("Elastic result: " + elasticResult);
         }
     }
 }

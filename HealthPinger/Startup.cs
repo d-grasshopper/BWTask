@@ -41,10 +41,10 @@ namespace HealthPinger
 
             if (isKubernetes == "true")
             {
-                    serviceLocations = GetServiceSettings(true);
-                    var elasticSettings = Configuration.GetSection("KubernetesElastic");
-                    elasticUri = elasticSettings["Uri"];
-                    elasticAuth = elasticSettings["Auth"];
+                serviceLocations = GetServiceSettings(true);
+                var elasticSettings = Configuration.GetSection("KubernetesElastic");
+                elasticUri = elasticSettings["Uri"];
+                elasticAuth = elasticSettings["Auth"];
             }
             else
             {
@@ -53,14 +53,12 @@ namespace HealthPinger
                 elasticUri = elasticSettings["Uri"];
                 elasticAuth = elasticSettings["Auth"];
             }
-            
-            Console.WriteLine("Services count: " + serviceLocations.Count());
+
             Dictionary<string, string> serviceDict = new Dictionary<string, string>();
             foreach (var service in serviceLocations)
             {
                 if (service.Key.Contains("Health"))
                 {
-                    Console.WriteLine("Service: " + service.Key + ", Uri: " + service.Value);
                     serviceDict.Add(service.Key, service.Value);
                 }
             }

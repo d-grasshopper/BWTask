@@ -24,12 +24,11 @@ namespace HealthPinger.Services
             var results = new Dictionary<string, int>();
             foreach (var serviceLocation in _serviceLocations)
             {
-                Console.WriteLine(serviceLocation.Value);
                 var response = await _httpClient.GetAsync($"http://{serviceLocation.Value.ToString()}/health");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = JsonConvert.DeserializeObject<StatusResponse>(await response.Content.ReadAsStringAsync());
-                    if(content.Status == "up") results.Add(serviceLocation.Key, 1);
+                    if (content.Status == "up") results.Add(serviceLocation.Key, 1);
                 }
             }
             return results;
