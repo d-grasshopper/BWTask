@@ -10,18 +10,15 @@ namespace HealthPinger.Services
 {
     public class ElasticService : IPostToElastic
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+        private readonly IHttpWrapper _httpClient;
         private readonly Uri _elasticUri;
-        private readonly string _elasticAuth;
 
-        public ElasticService(string elasticUri, string elasticAuth)
+        public ElasticService(IHttpWrapper httpWrapper, string elasticUri, string elasticAuth)
         {
-            
             _elasticUri = new Uri("http://" + elasticUri);
-            _elasticAuth = elasticAuth;
-            var bytearray = Encoding.ASCII.GetBytes(_elasticAuth);
-            _httpClient.BaseAddress = _elasticUri;
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(bytearray));
+            _httpClient = httpWrapper;
+            _httpClient.SetBaseAddress(elasticUri);
+            _httpClient.SetBasicAuth(elasticAuth);
         }
 
         public async Task<bool> PostToElastic(IEnumerable<KeyValuePair<string, int>> results)

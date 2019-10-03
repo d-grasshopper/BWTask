@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using HealthPinger.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -63,8 +64,8 @@ namespace HealthPinger
                 }
             }
 
-            services.AddSingleton<IPingHealthEndpoints>(new HealthPingService(serviceDict));
-            services.AddSingleton<IPostToElastic>(new ElasticService(elasticUri, elasticAuth));
+            services.AddSingleton<IPingHealthEndpoints>(new HealthPingService(new HttpWrapper(), serviceDict));
+            services.AddSingleton<IPostToElastic>(new ElasticService(new HttpWrapper(), elasticUri, elasticAuth));
             services.AddSingleton<ICheckHealthAndPost, HealthChecker>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

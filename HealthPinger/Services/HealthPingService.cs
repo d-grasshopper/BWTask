@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
+using System.Net;
 using System.Threading.Tasks;
-using HealthPinger.Core;
 using HealthPinger.Responses;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace HealthPinger.Services
 {
     public class HealthPingService : IPingHealthEndpoints
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+        private readonly IHttpWrapper _httpClient;
         private readonly Dictionary<string, string> _serviceLocations;
 
-        public HealthPingService(Dictionary<string, string> services)
+        public HealthPingService(IHttpWrapper httpClient, Dictionary<string, string> services)
         {
+            _httpClient = httpClient;
             _serviceLocations = services;
         }
         public async Task<Dictionary<string, int>> CheckHealthOfServices()
@@ -25,10 +23,14 @@ namespace HealthPinger.Services
             foreach (var serviceLocation in _serviceLocations)
             {
                 var response = await _httpClient.GetAsync($"http://{serviceLocation.Value.ToString()}/health");
-                if (response.IsSuccessStatusCode)
+                if (response.StatusCode == HttpStatusCode.OK)
                 {
                     var content = JsonConvert.DeserializeObject<StatusResponse>(await response.Content.ReadAsStringAsync());
                     if (content.Status == "up") results.Add(serviceLocation.Key, 1);
+                }
+                else
+                {
+                    results.Add(serviceLocation.Key, 0);
                 }
             }
             return results;
