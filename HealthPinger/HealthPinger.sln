@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthPinger", "HealthPinger.csproj", "{98AAA367-6FC2-4022-BBF3-A85B284F1EAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthPinger", "HealthPinger/HealthPinger.csproj", "{98AAA367-6FC2-4022-BBF3-A85B284F1EAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthPinger.Tests", "..\HealthPinger.Tests\HealthPinger.Tests\HealthPinger.Tests.csproj", "{9954EC60-D513-4FAA-8F84-E1849298E433}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthPinger.Tests", "HealthPinger.Tests/HealthPinger.Tests.csproj", "{9954EC60-D513-4FAA-8F84-E1849298E433}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
